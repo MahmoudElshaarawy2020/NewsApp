@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,15 +35,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.newsapp.R
 import com.example.newsapp.ui.components.LeftHomeCard
 import com.example.newsapp.ui.components.RightHomeCard
+import com.example.newsapp.viewmodels.NewsViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(viewModel: NewsViewModel = hiltViewModel()) {
 
+    LaunchedEffect(key1 = Unit) {
+        viewModel.getNews("bbc-news")
+    }
     val systemUiController = rememberSystemUiController()
 
     // Change the status bar color
