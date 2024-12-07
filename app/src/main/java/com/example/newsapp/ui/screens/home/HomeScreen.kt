@@ -1,4 +1,4 @@
-package com.example.newsapp.ui.screens
+package com.example.newsapp.ui.screens.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,13 +19,13 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
@@ -36,19 +36,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.newsapp.R
 import com.example.newsapp.ui.components.LeftHomeCard
+import com.example.newsapp.ui.components.NewsAppBar
 import com.example.newsapp.ui.components.RightHomeCard
 import com.example.newsapp.viewmodels.NewsViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(viewModel: NewsViewModel = hiltViewModel()) {
+fun HomeScreen(navController: NavHostController) {
 
-    LaunchedEffect(key1 = Unit) {
-        viewModel.getNews("bbc-news")
-    }
     val systemUiController = rememberSystemUiController()
 
     // Change the status bar color
@@ -84,21 +84,7 @@ fun HomeScreen(viewModel: NewsViewModel = hiltViewModel()) {
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(bottomStart = 50.dp, bottomEnd = 50.dp)) // Rounded corners
             ) {
-                TopAppBar(
-                    title = {
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            text = "News App",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White,
-                            textAlign = TextAlign.Center
-                        )
-                    },
-                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                        containerColor = colorResource(id = R.color.green) // Background color
-                    )
-                )
+                NewsAppBar(sideMenuIcon = false, title = "News App")
             }
 
             // Padding between TopAppBar and content
@@ -122,9 +108,9 @@ fun HomeScreen(viewModel: NewsViewModel = hiltViewModel()) {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                LeftHomeCard(R.color.red, R.drawable.ball, "Sports")
+                LeftHomeCard(R.color.red, R.drawable.ball, "Sports", navController)
                 Spacer(modifier = Modifier.width(24.dp))
-                RightHomeCard(R.color.blue, R.drawable.politics, "Politics")
+                RightHomeCard(R.color.blue, R.drawable.politics, "Politics", navController)
             }
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -135,9 +121,9 @@ fun HomeScreen(viewModel: NewsViewModel = hiltViewModel()) {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                LeftHomeCard(R.color.pink, R.drawable.heart, "Health")
+                LeftHomeCard(R.color.pink, R.drawable.heart, "Health", navController)
                 Spacer(modifier = Modifier.width(24.dp))
-                RightHomeCard(R.color.brown, R.drawable.business, "Business")
+                RightHomeCard(R.color.brown, R.drawable.business, "Business", navController)
             }
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -148,9 +134,9 @@ fun HomeScreen(viewModel: NewsViewModel = hiltViewModel()) {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                LeftHomeCard(R.color.baby_blue, R.drawable.earth, "Environment")
+                LeftHomeCard(R.color.baby_blue, R.drawable.earth, "Environment", navController)
                 Spacer(modifier = Modifier.width(24.dp))
-                RightHomeCard(R.color.yellow, R.drawable.science, "Science")
+                RightHomeCard(R.color.yellow, R.drawable.science, "Science", navController)
             }
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -158,8 +144,3 @@ fun HomeScreen(viewModel: NewsViewModel = hiltViewModel()) {
     }
 }
 
-@Preview
-@Composable
-fun HomeScreenPreview() {
-    HomeScreen()
-}

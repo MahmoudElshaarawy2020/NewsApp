@@ -2,6 +2,7 @@ package com.example.newsapp.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,11 +23,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.newsapp.R
+import com.example.newsapp.navigation.Screen
 
 @Composable
 fun LeftHomeCard(
-    color : Int, image : Int, title : String) {
+    color : Int, image : Int, title : String, navController: NavHostController) {
     val customFontFamily = FontFamily(
         Font(R.font.exosemibold, FontWeight.SemiBold),
     )
@@ -36,7 +39,8 @@ fun LeftHomeCard(
             topEnd = 24.dp,    // Rounded top-right corner
             bottomStart = 24.dp, // Rounded bottom-left corner
             bottomEnd = 0.dp    // No rounding for bottom-right corner
-        )
+        ),
+        modifier = Modifier.clickable { navController.navigate(Screen.NewsScreen.createRoute(title)) }
     ){
         Column(
             modifier = Modifier
@@ -67,7 +71,7 @@ fun LeftHomeCard(
 }
 
 @Composable
-fun RightHomeCard(color : Int, image : Int, title : String) {
+fun RightHomeCard(color : Int, image : Int, title : String, navController: NavHostController) {
     val customFontFamily = FontFamily(
         Font(R.font.exosemibold, FontWeight.SemiBold),
     )
@@ -76,8 +80,10 @@ fun RightHomeCard(color : Int, image : Int, title : String) {
             topStart = 24.dp,
             topEnd = 24.dp,
             bottomStart = 0.dp,
-            bottomEnd = 24.dp
-        )
+            bottomEnd = 24.dp,
+        ),
+        modifier = Modifier
+            .clickable { navController.navigate(Screen.NewsScreen.createRoute(title)) }
     ){
         Column(
             modifier = Modifier

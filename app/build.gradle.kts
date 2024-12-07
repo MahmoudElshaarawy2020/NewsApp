@@ -95,7 +95,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
     //noinspection GradleDependency
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
-// ViewModel
+    // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
 
     // Kotlin Coroutines
@@ -112,4 +112,10 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.github.bumptech.glide:glide:4.13.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.13.0")
+
+    //Glide Image
+    implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
+    implementation ("com.github.bumptech.glide:glide:4.13.0")
+    kapt ("com.github.bumptech.glide:compiler:4.13.0")
+
 }
