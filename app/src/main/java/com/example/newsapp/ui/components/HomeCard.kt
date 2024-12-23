@@ -29,7 +29,7 @@ import com.example.newsapp.navigation.Screen
 
 @Composable
 fun LeftHomeCard(
-    color : Int, image : Int, title : String, navController: NavHostController) {
+    color : Int, image : Int, title : String, id :String, onClick : () -> Unit) {
     val customFontFamily = FontFamily(
         Font(R.font.exosemibold, FontWeight.SemiBold),
     )
@@ -40,7 +40,7 @@ fun LeftHomeCard(
             bottomStart = 24.dp, // Rounded bottom-left corner
             bottomEnd = 0.dp    // No rounding for bottom-right corner
         ),
-        modifier = Modifier.clickable { navController.navigate(Screen.NewsScreen.createRoute(title)) }
+        modifier = Modifier.clickable { onClick() }
     ){
         Column(
             modifier = Modifier
@@ -71,7 +71,7 @@ fun LeftHomeCard(
 }
 
 @Composable
-fun RightHomeCard(color : Int, image : Int, title : String, navController: NavHostController) {
+fun RightHomeCard(color : Int, image : Int, title : String, id : String, onClick : () -> Unit) {
     val customFontFamily = FontFamily(
         Font(R.font.exosemibold, FontWeight.SemiBold),
     )
@@ -83,7 +83,7 @@ fun RightHomeCard(color : Int, image : Int, title : String, navController: NavHo
             bottomEnd = 24.dp,
         ),
         modifier = Modifier
-            .clickable { navController.navigate(Screen.NewsScreen.createRoute(title)) }
+            .clickable {onClick() }
     ){
         Column(
             modifier = Modifier

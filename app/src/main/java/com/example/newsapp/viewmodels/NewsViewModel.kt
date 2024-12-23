@@ -1,9 +1,6 @@
 package com.example.newsapp.viewmodels
 
 import android.util.Log
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.domain.dto.NewsResponse
 import com.example.domain.usecase.GetNews
@@ -17,15 +14,14 @@ class NewsViewModel @Inject constructor(private val getNewsUseCase: GetNews) : V
     private val _news : MutableStateFlow<NewsResponse?> = MutableStateFlow(null)
     val news : StateFlow<NewsResponse?> = _news
 
-    suspend fun getNews(source: String) {
+    suspend fun getNews(category: String, source: String) {
         try {
-            _news.value = getNewsUseCase(source)
+            _news.value = getNewsUseCase(category, source)
             Log.e("NewsViewModel", news.value.toString())
         } catch(e: Exception)
         {
             Log.e("NewsViewModel", "Error fetching news", e)
         }
-
     }
 
 }
